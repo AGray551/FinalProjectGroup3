@@ -14,15 +14,11 @@ The **Campus Event Tracker** is a mobile/web application designed to help studen
 
 **Screens:**
 
-* Login / Signup
-* Event Feed (List of upcoming events)
-* Event Details (Date, time, location, description, RSVP)
-* My Events (RSVPed events, reminders)
-* Create Event (For organizers)
-* Settings (Notification preferences, profile)
-
-*Mockups will be created using PowerPoint, Figma, or FluidUI.*
-
+![Login screen](Images/StoryBoards/LoginSB.png)
+![Calender to track events](Images/StoryBoards/MyEventsSB.png)
+![Scrolling event feed](Images/StoryBoards/EventFeedSB.png)
+![Create an event input field](Images/StoryBoards/CreateEventSB.png)
+![Profile page](Images/StoryBoards/ProfileSB.png)
 ---
 
 ## 3. Functional Requirements
