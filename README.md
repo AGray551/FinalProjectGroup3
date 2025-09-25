@@ -134,11 +134,11 @@ Draft schema for the `/events` endpoint:
 ## 7. Scrum Roles
 
 * **GitHub Administrator:** Gray Andrews
-* **Product Owner:** \[Team Name]
-* **Scrum Master:** \[Team Member Name]
-* **DevOps:** \[Team Member Name]
+* **Product Owner:** \ Group 3
+* **Scrum Master:** \ Sid Bade
+* **DevOps:** \ Sid Bade
 * **Frontend Developer:** Maurice Dennis
-* **Backend Developer:** \[Team Member Name]
+* **Backend Developer:** Sid Bade
 
 ---
 
