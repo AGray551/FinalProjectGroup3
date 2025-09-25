@@ -158,7 +158,7 @@ Tasks and user stories are organized in GitHub Projects under **Milestone #1**.
 
 ## 9. Weekly Stand-Up Meeting
 
-* **Time:** Sundays at 8:00 AM
+* **Time:** Wednesdays at 6:30 PM
 * **Platform:** Microsoft Teams
 * **Meeting Link:** [Join Meeting](https://teams.microsoft.com/meet/2591305635954?p=y6A2X4Zyvo2UQgz9q0)
 
