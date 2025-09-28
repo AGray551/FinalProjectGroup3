@@ -133,13 +133,10 @@ Draft schema for the `/events` endpoint:
 
 ## 7. Scrum Roles
 
-* **GitHub Administrator:** Gray Andrews
+* **GitHub Administrator/Scrum Master:** Gray Andrews
 * **Product Owner:** \ Group 3
-* **Scrum Master:** \ Sid Bade
-* **DevOps:** \ Sid Bade
-* **Frontend Developer:** Maurice Dennis
-* **Backend Developer:** Sid Bade
-
+* **Business Logic/Persistance:** \ Sid Bade
+* **UI Specialist:** Maurice Dennis
 ---
 
 ## 8. GitHub Project Link
@@ -148,11 +145,11 @@ Draft schema for the `/events` endpoint:
 
 **Milestones:**
 
-* **Milestone #1:** User login, event feed, RSVP functionality
-* **Milestone #2:** Notifications
-* **Milestone #3:** Calendar integration, polish
+* **Milestone #1:** Define Service Endpoints, Basic UI, and Writing Unit Tests
+* **Milestone #2:** TBA
+* **Milestone #3:** TBA
 
-Tasks and user stories are organized in GitHub Projects under **Milestone #1**.
+Tasks are organized in GitHub Projects under **Milestone #1**.
 
 ---
 
