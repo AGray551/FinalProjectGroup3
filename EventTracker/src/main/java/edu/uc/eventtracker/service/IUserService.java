@@ -1,9 +1,10 @@
 package edu.uc.eventtracker.service;
- 
-import model.User;
- 
+
+import edu.uc.eventtracker.model.User;
+import java.util.*;
+
 public interface IUserService {
-    User getUserById(String userId);
-    void createUser(User user);
+    User create(User u);
+    Optional<User> findById(UUID id);
+    List<User> findAll();
 }
- 

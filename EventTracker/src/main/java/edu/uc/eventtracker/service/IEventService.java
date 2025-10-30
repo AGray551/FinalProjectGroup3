@@ -1,10 +1,11 @@
 package edu.uc.eventtracker.service;
- 
-import model.Event;
-import java.util.List;
- 
+
+import edu.uc.eventtracker.model.Event;
+import java.util.*;
+
+// Matches methods commonly referenced by the existing mock
 public interface IEventService {
     List<Event> getUpcomingEvents();
-    Event getEventById(String eventId);
-    void rsvpToEvent(String eventId, String userId);
+    Optional<Event> getEventById(String id);
+    boolean rsvpToEvent(String eventId, String userId);
 }
