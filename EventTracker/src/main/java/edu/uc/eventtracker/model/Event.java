@@ -1,34 +1,25 @@
-package model;
- 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
- 
+package edu.uc.eventtracker.model;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 public class Event {
-    private String id;
+    private UUID id;
     private String title;
-    private String description;
-    private Date date;
-    private String location;
-    private List<String> attendees = new ArrayList<>();
- 
-    public Event(String id, String title, String description, Date date, String location) {
-        this.id = id;
+    private LocalDateTime startsAt;
+
+    public Event() {}
+    public Event(String title, LocalDateTime startsAt) {
         this.title = title;
-        this.description = description;
-        this.date = date;
-        this.location = location;
-    public String getId() { return this.id; }
+        this.startsAt = startsAt;
     }
- 
-    public void addAttendee(String userId) {
-        attendees.add(userId);
-    }
- 
-    public List<String> getAttendees() {
-        return attendees;
-    }
- 
-    // Getters and setters…
+
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String t) { this.title = t; }
+
+    public LocalDateTime getStartsAt() { return startsAt; }
+    public void setStartsAt(LocalDateTime s) { this.startsAt = s; }
 }
- 
