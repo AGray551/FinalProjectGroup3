@@ -1,4 +1,4 @@
-package test;
+package org.example.eventtracker.test;
 
 import mock.MockEventService;
 import model.Event;
