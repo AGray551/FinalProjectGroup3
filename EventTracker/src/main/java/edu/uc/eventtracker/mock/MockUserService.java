@@ -1,4 +1,4 @@
-package mock;
+package edu.uc.eventtracker.mock;
  
 import service.IUserService;
 import model.User;
