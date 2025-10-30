@@ -1,22 +1,26 @@
 package edu.uc.eventtracker.mock;
- 
-import service.IOrganizerService;
-import model.Event;
- 
-import java.util.ArrayList;
-import java.util.List;
- 
+
+import edu.uc.eventtracker.model.Event;
+import edu.uc.eventtracker.service.IOrganizerService;
+import java.util.*;
+
 public class MockOrganizerService implements IOrganizerService {
-    private List<Event> createdEvents = new ArrayList<>();
- 
+    private final Map<UUID, Event> store = new HashMap<>();
+
     @Override
-    public void createEvent(Event event) {
-        createdEvents.add(event);
+    public Event create(Event e) {
+        if (e.getId() == null) e.setId(UUID.randomUUID());
+        store.put(e.getId(), e);
+        return e;
     }
- 
+
     @Override
-    public void deleteEvent(String eventId) {
-        createdEvents.removeIf(e -> e.getId().equals(eventId));
+    public Optional<Event> findById(UUID id) {
+        return Optional.ofNullable(store.get(id));
+    }
+
+    @Override
+    public List<Event> findAll() {
+        return new ArrayList<>(store.values());
     }
 }
- 
