@@ -1,13 +1,12 @@
-package test;
- 
-import mock.MockOrganizerService;
-import model.Event;
+package EventTracker;
+
+import EventTracker.mock.MockOrganizerService;
+import EventTracker.model.Event;
 import org.junit.jupiter.api.Test;
- 
-import java.util.Date;
- 
 import static org.junit.jupiter.api.Assertions.*;
  
+import java.util.Date;
+
 public class OrganizerServiceTest {
  
     @Test

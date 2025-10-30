@@ -1,7 +1,7 @@
-package mock;
+package EventTracker.mock;
  
-import service.IOrganizerService;
-import model.Event;
+import EventTracker.service.IOrganizerService;
+import EventTracker.model.Event;
  
 import java.util.ArrayList;
 import java.util.List;

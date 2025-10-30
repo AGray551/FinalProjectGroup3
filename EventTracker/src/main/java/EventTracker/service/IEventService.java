@@ -1,6 +1,6 @@
-package service;
+package EventTracker.service;
  
-import model.Event;
+import EventTracker.model.Event;
 import java.util.List;
  
 public interface IEventService {

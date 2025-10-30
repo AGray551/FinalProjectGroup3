@@ -1,4 +1,4 @@
-package model;
+package EventTracker.model;
  
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,5 +29,8 @@ public class Event {
     }
  
     // Getters and setters…
+    public String getId() {
+        return id;
+    }
 }
  

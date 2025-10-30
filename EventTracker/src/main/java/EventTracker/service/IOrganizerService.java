@@ -1,6 +1,6 @@
-package service;
+package EventTracker.service;
  
-import model.Event;
+import EventTracker.model.Event;
  
 public interface IOrganizerService {
     void createEvent(Event event);

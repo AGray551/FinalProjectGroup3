@@ -10,6 +10,13 @@
     <name>EventTracker</name>
     <url>http://maven.apache.org</url>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.3</version>
+        <relativePath/>
+    </parent>
+
 <dependencies>
     <!-- JUnit 5 -->
     <dependency>
@@ -17,6 +24,16 @@
         <artifactId>junit-jupiter</artifactId>
         <version>5.9.3</version>
         <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 </dependencies>
 

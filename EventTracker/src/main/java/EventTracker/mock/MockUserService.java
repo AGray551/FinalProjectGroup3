@@ -1,7 +1,7 @@
-package mock;
+package EventTracker.mock;
  
-import service.IUserService;
-import model.User;
+import EventTracker.service.IUserService;
+import EventTracker.model.User;
  
 import java.util.HashMap;
 import java.util.Map;

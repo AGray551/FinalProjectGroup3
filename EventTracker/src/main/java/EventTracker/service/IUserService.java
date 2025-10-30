@@ -1,6 +1,6 @@
-package service;
+package EventTracker.service;
  
-import model.User;
+import EventTracker.model.User;
  
 public interface IUserService {
     User getUserById(String userId);
