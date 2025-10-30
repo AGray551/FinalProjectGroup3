@@ -18,6 +18,7 @@ public class Event {
         this.description = description;
         this.date = date;
         this.location = location;
+    public String getId() { return this.id; }
     }
  
     public void addAttendee(String userId) {

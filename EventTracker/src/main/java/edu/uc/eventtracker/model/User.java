@@ -13,6 +13,7 @@ public class User {
         this.id = id;
         this.name = name;
         this.email = email;
+    public String getId() { return this.id; }
     }
  
     public void rsvp(String eventId) {
