@@ -1,26 +1,26 @@
-package test;
- 
-import mock.MockUserService;
-import model.User;
+package edu.uc.eventtracker;
+
+import edu.uc.eventtracker.mock.MockUserService;
+import edu.uc.eventtracker.model.User;
 import org.junit.jupiter.api.Test;
- 
+
 import static org.junit.jupiter.api.Assertions.*;
- 
-public class UserServiceTest {
- 
+import java.util.UUID;
+
+class UserServiceTest {
     @Test
-    public void givenUserwhenCreateUserthenUserCanBeRetrieved() {
-        // Given
-        MockUserService userService = new MockUserService();
-        User user = new User("1", "Riddhi", "riddhi@example.com");
- 
-        // When
-        userService.createUser(user);
-        User retrieved = userService.getUserById("1");
- 
-        // Then
-        assertNotNull(retrieved);
-        assertEquals("Riddhi", retrieved.getName());
+    void createThenFindById() {
+        var svc = new MockUserService();
+        var u = svc.create(new User("Ava"));
+        assertNotNull(u.getId(), "ID should be assigned on create");
+        assertEquals("Ava", svc.findById(u.getId()).orElseThrow().getName());
+    }
+
+    @Test
+    void listAllReturnsInserted() {
+        var svc = new MockUserService();
+        svc.create(new User("Ava"));
+        svc.create(new User("Ben"));
+        assertTrue(svc.findAll().size() >= 2, "Expected at least two users");
     }
 }
- 
