@@ -1,4 +1,4 @@
-package service;
+package edu.uc.eventtracker.service;
  
 import model.User;
  
