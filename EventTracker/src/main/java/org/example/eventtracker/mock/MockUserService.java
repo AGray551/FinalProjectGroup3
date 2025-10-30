@@ -1,4 +1,4 @@
-package org.example.eventtracker.service.mock;
+package org.example.eventtracker.mock;
 
 import org.example.eventtracker.service.IUserService;
 import org.example.eventtracker.model.User;
