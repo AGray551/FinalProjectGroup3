@@ -1,7 +1,7 @@
 package EventTracker;
 
-import mock.MockUserService;
-import model.User;
+import EventTracker.mock.MockUserService;
+import EventTracker.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

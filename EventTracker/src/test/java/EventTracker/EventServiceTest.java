@@ -1,7 +1,7 @@
 package EventTracker;
 
-import mock.MockEventService;
-import model.Event;
+import EventTracker.mock.MockEventService;
+import EventTracker.model.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
