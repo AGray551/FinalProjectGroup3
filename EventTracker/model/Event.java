@@ -24,10 +24,10 @@ public class Event {
         attendees.add(userId);
     }
  
-    public List<String> getAttendees() {
-        return attendees;
-    }
- 
-    // Getters and setters…
+    public List<String> getAttendees() {return attendees; }
+    public String getId() {return id; }
+    public String getTitle() {return title; }
+    public String getDescription() {return description; }
+    public Date getDate() {return date; }
+    public String getLocation() {return location; }
 }
- 

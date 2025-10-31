@@ -17,9 +17,7 @@ public class User {
         rsvpedEvents.add(eventId);
     }
  
-    public List<String> getRsvpedEvents() {
-        return rsvpedEvents;
-    }
- 
-    // Getters and setters…
+    public List<String> getRsvpedEvents() {return rsvpedEvents; }
+    public String getName() {return name; }
+    public String getEmail() {return email; }
 }
