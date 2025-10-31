@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
  
 public class User {
-    private String id;
     private String name;
     private String email;
     private List<String> rsvpedEvents = new ArrayList<>();
  
-    public User(String id, String name, String email) {
-        this.id = id;
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
     }
