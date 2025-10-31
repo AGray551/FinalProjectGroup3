@@ -1,0 +1,10 @@
+package dao;
+
+import model.Event;
+import java.util.List;
+
+public interface eventDao{
+    List<Event> getAllEvents();
+    Event getEventById(int id);
+    void addEvent (Event event);
+}
