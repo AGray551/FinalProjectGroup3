@@ -3,38 +3,25 @@ package EventTracker;
 import EventTracker.mock.MockOrganizerService;
 import EventTracker.model.Event;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
- 
-import java.util.Date;
 
-public class OrganizerServiceTest {
- 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class OrganizerServiceTest {
     @Test
-    public void givenEventwhenCreateEventthenEventIsStored() {
-        // Given
-        MockOrganizerService organizerService = new MockOrganizerService();
-        Event event = new Event("3", "Workshop", "Tech workshop", new Date(), "Lab 101");
- 
-        // When
-        organizerService.createEvent(event);
- 
-        // Then
-        // No direct access to list, but you can assume it's stored if no exception is thrown
-        assertDoesNotThrow(() -> organizerService.createEvent(event));
-    }
- 
-    @Test
-    public void givenEventIdwhenDeleteEventthenEventIsRemoved() {
-        // Given
-        MockOrganizerService organizerService = new MockOrganizerService();
-        Event event = new Event("4", "Seminar", "Guest speaker", new Date(), "Auditorium");
-        organizerService.createEvent(event);
- 
-        // When
-        organizerService.deleteEvent("4");
- 
-        // Then
-        // Again, assuming internal list is updated correctly
-        assertDoesNotThrow(() -> organizerService.deleteEvent("4"));
+    void createFindAllAndFindById() {
+        var svc = new MockOrganizerService();
+        var e = new Event("Study Group", LocalDateTime.now().plusHours(2));
+
+        var saved = svc.createEvent(e);
+        assertNotNull(saved.getId(), "ID should be assigned on create");
+
+        assertTrue(svc.findAll().size() >= 1, "Expected at least one event");
+
+        var found = svc.findById(saved.getId());
+        assertTrue(found.isPresent(), "Should find event by ID");
+        assertEquals("Study Group", found.get().getTitle());
     }
 }

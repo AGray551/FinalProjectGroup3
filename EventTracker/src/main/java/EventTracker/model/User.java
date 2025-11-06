@@ -1,35 +1,17 @@
 package EventTracker.model;
- 
-import java.util.ArrayList;
-import java.util.List;
- 
+
+import java.util.UUID;
+
 public class User {
-    private String id;
+    private UUID id;
     private String name;
-    private String email;
-    private List<String> rsvpedEvents = new ArrayList<>();
- 
-    public User(String id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
 
-    public void rsvp(String eventId) {
-        rsvpedEvents.add(eventId);
-    }
+    public User() {}
+    public User(String name) { this.name = name; }
 
-    public List<String> getRsvpedEvents() {
-        return rsvpedEvents;
-    }
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
 
-    // Getters and setters…
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
+    public String getName() { return name; }
+    public void setName(String n) { this.name = n; }
 }

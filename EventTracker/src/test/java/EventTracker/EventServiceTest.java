@@ -3,37 +3,37 @@ package EventTracker;
 import EventTracker.mock.MockEventService;
 import EventTracker.model.Event;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-
-public class EventServiceTest {
-
+class EventServiceTest {
     @Test
-    public void givenEventService_whenGetUpcomingEvents_thenReturnEventList() {
-        // Given
-        MockEventService eventService = new MockEventService();
+    void getUpcomingAndFindByIdAndRsvp() {
+        var svc = new MockEventService();
+        // Create two events: one future, one past
+        var future = new Event("Hackathon", LocalDateTime.now().plusDays(1));
+        var past = new Event("Old Meetup", LocalDateTime.now().minusDays(1));
 
-        // When
-        List<Event> events = eventService.getUpcomingEvents();
+        // Seed service
+        svc.seed(future, past);
 
-        // Then
-        assertFalse(events.isEmpty());
-        assertEquals("Hackathon", events.get(0).getTitle());
-    }
+        // Upcoming should include the future event (past may be excluded)
+        var upcoming = svc.getUpcomingEvents();
+        assertTrue(upcoming.stream().anyMatch(e -> "Hackathon".equals(e.getTitle())),
+                "Expected future event to be in upcoming list");
 
-    @Test
-    public void givenUserId_whenRSVPToEvent_thenUserAddedToAttendees() {
-        // Given
-        MockEventService eventService = new MockEventService();
-        String userId = "user123";
-        String eventId = "1";
+        // Find by ID (string)
+        var futureId = future.getId().toString();
+        Optional<Event> byId = svc.getEventById(futureId);
+        assertTrue(byId.isPresent(), "Should find event by ID");
+        assertEquals("Hackathon", byId.get().getTitle());
 
-        // When
-        eventService.rsvpToEvent(eventId, userId);
-        Event event = eventService.getEventById(eventId);
-
-        // Then
-        assertTrue(event.getAttendees().contains(userId));
+        // RSVP should work for existing event
+        assertTrue(svc.rsvpToEvent(futureId, "user-123"));
+        // RSVP should fail for unknown event
+        assertFalse(svc.rsvpToEvent("does-not-exist", "user-123"));
     }
 }

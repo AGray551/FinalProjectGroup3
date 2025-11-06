@@ -1,8 +1,13 @@
 package EventTracker.service;
  
 import EventTracker.model.Event;
- 
+import java.util.*;
+
+// Simple organizer-facing event management interface
 public interface IOrganizerService {
-    void createEvent(Event event);
-    void deleteEvent(String eventId);
+    Event createEvent(Event e);
+    Event updateEvent(Event e);
+    Event deleteEvent(Event e);
+    Optional<Event> findById(UUID id);
+    List<Event> findAll();
 }

@@ -2,20 +2,25 @@ package EventTracker.mock;
  
 import EventTracker.service.IUserService;
 import EventTracker.model.User;
- 
-import java.util.HashMap;
-import java.util.Map;
- 
+import java.util.*;
+
 public class MockUserService implements IUserService {
-    private Map<String, User> users = new HashMap<>();
- 
+    private final Map<UUID, User> store = new HashMap<>();
+
     @Override
-    public User getUserById(String userId) {
-        return users.get(userId);
+    public User create(User user) {
+        if (user.getId() == null) user.setId(UUID.randomUUID());
+        store.put(user.getId(), user);
+        return user;
     }
- 
+
     @Override
-    public void createUser(User user) {
-        users.put(user.getId(), user);
+    public Optional<User> findById(UUID id) {
+        return Optional.ofNullable(store.get(id));
+    }
+
+    @Override
+    public List<User> findAll() {
+        return new ArrayList<>(store.values());
     }
 }
