@@ -1,41 +1,41 @@
+
 package test;
- 
+
 import mock.MockOrganizerService;
 import model.Event;
 import org.junit.jupiter.api.Test;
- 
 import java.util.Date;
- 
 import static org.junit.jupiter.api.Assertions.*;
- 
+
+/**
+ * Tests for MockOrganizerService using BDD style.
+ */
 public class OrganizerServiceTest {
- 
+
     @Test
-    public void givenEventwhenCreateEventthenEventIsStored() {
+    public void givenEvent_whenCreateEvent_thenEventIsStored() {
         // Given
         MockOrganizerService organizerService = new MockOrganizerService();
         Event event = new Event("3", "Workshop", "Tech workshop", new Date(), "Lab 101");
- 
+
         // When
         organizerService.createEvent(event);
- 
+
         // Then
-        // No direct access to list, but you can assume it's stored if no exception is thrown
-        assertDoesNotThrow(() -> organizerService.createEvent(event));
+        assertTrue(organizerService.getCreatedEvents().contains(event), "Event should be stored in the list");
     }
- 
+
     @Test
-    public void givenEventIdwhenDeleteEventthenEventIsRemoved() {
+    public void givenEventId_whenDeleteEvent_thenEventIsRemoved() {
         // Given
         MockOrganizerService organizerService = new MockOrganizerService();
         Event event = new Event("4", "Seminar", "Guest speaker", new Date(), "Auditorium");
         organizerService.createEvent(event);
- 
+
         // When
         organizerService.deleteEvent("4");
- 
+
         // Then
-        // Again, assuming internal list is updated correctly
-        assertDoesNotThrow(() -> organizerService.deleteEvent("4"));
+        assertFalse(organizerService.getCreatedEvents().contains(event), "Event should be removed from the list");
     }
 }
