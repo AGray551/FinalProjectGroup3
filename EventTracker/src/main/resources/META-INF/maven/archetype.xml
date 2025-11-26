@@ -1,9 +1,16 @@
+
 <archetype>
-  <id>EventTracker</id>
-  <sources>
-    <source>src/main/java/App.java</source>
-  </sources>
-  <testSources>
-    <source>src/test/java/AppTest.java</source>
-  </testSources>
+    <id>EventTracker</id>
+    <sources>
+        <source>src/main/java/org/example/App.java</source>
+    </sources>
+    <resources>
+        <resource>src/main/resources</resource>
+    </resources>
+    <testSources>
+        <source>src/test/java/org/example/AppTest.java</source>
+    </testSources>
+    <testResources>
+        <resource>src/test/resources</resource>
+    </testResources>
 </archetype>
