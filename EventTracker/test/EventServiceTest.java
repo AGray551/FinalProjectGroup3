@@ -1,13 +1,15 @@
+
 package test;
 
 import mock.MockEventService;
 import model.Event;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for MockEventService using BDD style.
+ */
 public class EventServiceTest {
 
     @Test
@@ -19,8 +21,8 @@ public class EventServiceTest {
         List<Event> events = eventService.getUpcomingEvents();
 
         // Then
-        assertFalse(events.isEmpty());
-        assertEquals("Hackathon", events.get(0).getTitle());
+        assertFalse(events.isEmpty(), "Event list should not be empty");
+        assertEquals("Hackathon", events.get(0).getTitle(), "First event title should be Hackathon");
     }
 
     @Test
@@ -35,6 +37,5 @@ public class EventServiceTest {
         Event event = eventService.getEventById(eventId);
 
         // Then
-        assertTrue(event.getAttendees().contains(userId));
+        assertTrue(event.getAttendees().contains(userId), "Attendees should include the user");
     }
-}
