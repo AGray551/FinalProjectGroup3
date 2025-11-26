@@ -1,38 +1,30 @@
-package $org.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+package org.example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit test for simple App.
+ * Unit tests for App class using JUnit 5.
  */
-public class AppTest 
-    extends TestCase
-{
+public class AppTest {
+
     /**
-     * Create the test case
-     *
-     * @param testName name of the test case
+     * Given the application runs,
+     * When main method is executed,
+     * Then it should not throw any exceptions.
      */
-    public AppTest( String testName )
-    {
-        super( testName );
+    @Test
+    public void givenApp_whenMainRuns_thenNoException() {
+        assertDoesNotThrow(() -> App.main(new String[]{}), "App should run without exceptions");
     }
 
     /**
-     * @return the suite of tests being tested
+     * Simple sanity check.
      */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void testTrueCondition() {
+        assertTrue(true, "True should always be true");
     }
 }
+
