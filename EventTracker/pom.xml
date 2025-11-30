@@ -44,7 +44,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Your Jakarta Persistence API (optional, JPA starter already includes it) -->
+        <!-- Jakarta Persistence API (optional, JPA starter already includes it) -->
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>

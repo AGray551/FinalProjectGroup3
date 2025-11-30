@@ -1,4 +1,3 @@
-
 package com.eventtracker;
 
 import org.springframework.boot.SpringApplication;
