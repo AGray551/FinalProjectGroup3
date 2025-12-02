@@ -1,41 +1,32 @@
-
 package com.eventtracker.controller;
 
 import com.eventtracker.model.Event;
 import com.eventtracker.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/events")
-public class EventController {
+import java.util.List;
 
+@RestController
+@RequestMapping("/api/events") // use /api prefix for frontend fetches
+@CrossOrigin(origins = "http://localhost:3000") // React dev server
+public class EventController {
     @Autowired
     private EventService eventService;
 
     @GetMapping
-    public String listEvents(Model model) {
-        model.addAttribute("events", eventService.getAllEvents());
-        return "events";
-    }
-
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("event", new Event());
-        return "createEvent";
+    public List<Event> getAllEvents() {
+        return eventService.getAllEvents(); // returns JSON
     }
 
     @PostMapping("/create")
-    public String createEvent(@ModelAttribute Event event) {
+    public Event createEvent(@RequestBody Event event) {
         eventService.createEvent(event);
-        return "redirect:/events";
+        return event;
     }
 
     @PostMapping("/{id}/rsvp")
-    public String rsvpEvent(@PathVariable String id, @RequestParam String userId) {
+    public void rsvpEvent(@PathVariable String id, @RequestParam String userId) {
         eventService.rsvpToEvent(id, userId);
-        return "redirect:/events";
     }
 }
