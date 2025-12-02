@@ -2,6 +2,7 @@ package com.eventtracker.mock;
 
 import com.eventtracker.model.Event;
 import com.eventtracker.service.EventService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Qualifier
 @Service
-@Primary
 public class MockEvents implements EventService {
     private List<Event> events = new ArrayList<>();
 
     public MockEvents() {
-        events.add(new Event("1", "Hackathon", "24-hour coding event", new Date(), "Student Center"));
-        events.add(new Event("2", "Career Fair", "Meet employers", new Date(), "Main Hall"));
+        events.add(new Event("1", "Hackathon", "24-hour coding event", new Date(), "Student Center", null));
+        events.add(new Event("2", "Career Fair", "Meet employers", new Date(), "Main Hall", null));
     }
 
     @Override

@@ -5,10 +5,12 @@ import com.eventtracker.model.Event;
 import com.eventtracker.repository.EventRepository;
 import com.eventtracker.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Primary
 @Service
 public class EventServiceImpl implements EventService {
 

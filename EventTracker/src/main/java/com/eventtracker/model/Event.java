@@ -16,18 +16,21 @@ public class Event {
     @Temporal(TemporalType.DATE)
     private Date date;
     private String location;
+    @Lob
+    private String image;
 
     @ElementCollection
     private List<String> attendees = new ArrayList<>();
 
     public Event() {}
 
-    public Event(String id, String title, String description, Date date, String location) {
+    public Event(String id, String title, String description, Date date, String location, String image) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
         this.location = location;
+        this.image = image;
     }
 
     public void addAttendee(String userId) {
@@ -49,6 +52,9 @@ public class Event {
 
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 
     public List<String> getAttendees() { return attendees; }
 }

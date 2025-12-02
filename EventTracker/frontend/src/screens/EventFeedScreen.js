@@ -53,12 +53,20 @@ const EventFeedScreen = ({ events, onNavigate }) => {
                 <MoreVertical className="w-5 h-5 text-gray-400" />
               </div>
 
-              {/* Event Image Placeholder */}
-              <div className="h-40 bg-[#E8EAF6] flex items-center justify-center relative">
-                <div className="opacity-20 flex space-x-2">
-                  <div className="w-12 h-12 bg-gray-600 rounded-full transform -translate-y-4"></div>
-                  <div className="w-12 h-12 bg-gray-600 rounded-md transform translate-y-2"></div>
-                </div>
+              {/* Event Image */}
+              <div className="h-40 bg-[#E8EAF6] flex items-center justify-center relative overflow-hidden">
+                {event.image ? (
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="opacity-20 flex space-x-2">
+                    <div className="w-12 h-12 bg-gray-600 rounded-full transform -translate-y-4"></div>
+                    <div className="w-12 h-12 bg-gray-600 rounded-md transform translate-y-2"></div>
+                  </div>
+                )}
               </div>
 
               {/* Details */}
