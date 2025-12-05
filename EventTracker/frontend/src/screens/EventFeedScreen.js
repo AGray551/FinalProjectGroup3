@@ -15,7 +15,6 @@ const EventFeedScreen = ({ onNavigate }) => {
     }
   };
 
-  // Fetch events on mount
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -91,6 +90,16 @@ const EventFeedScreen = ({ onNavigate }) => {
               <div className="p-4">
                 <p className="text-sm font-semibold text-gray-700 mb-1">{eventDate}</p>
                 <p className="text-sm text-gray-500 mb-4">{event.description}</p>
+
+                {/* --- BUTTONS --- */}
+                <div className="flex justify-end mt-3 space-x-2">
+                  <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full shadow-sm hover:bg-gray-300 transition">
+                    Ignore
+                  </button>
+                  <button className="px-4 py-2 bg-[#5E35B1] text-white rounded-full shadow-sm hover:bg-[#4527A0] transition">
+                    RSVP
+                  </button>
+                </div>
               </div>
             </div>
           );

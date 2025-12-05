@@ -6,7 +6,7 @@ const EventCreateScreen = ({ onNavigate }) => {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);   // <-- must be inside component
+  const [image, setImage] = useState(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
