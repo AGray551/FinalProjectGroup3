@@ -3,57 +3,41 @@ package com.eventtracker.controller;
 import com.eventtracker.model.User;
 import com.eventtracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
- * Controller for handling user-related requests.
- * Provides endpoints for listing users and creating new users.
+ * REST controller for handling user-related HTTP requests.
+ * Provides endpoints to retrieve users and create new users.
  */
-@Controller
-@RequestMapping("/users")
+@RestController
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     /**
-     * Handles GET requests to "/users".
-     * Adds all users to the model and returns the "users" Thymeleaf template.
+     * Get all users (JSON).
      *
-     * @param model the model object to pass data to the view
-     * @return the name of the template to render ("users")
+     * @return list of all users
      */
     @GetMapping
-    public String listUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "users";
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     /**
-     * Handles GET requests to "/users/create".
-     * Prepares a blank User object and returns the "createUser" template.
+     * Create a new user (JSON body).
      *
-     * @param model the model object to pass data to the view
-     * @return the name of the template to render ("createUser")
-     */
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("user", new User());
-        return "createUser";
-    }
-
-    /**
-     * Handles POST requests to "/users/create".
-     * Persists the submitted user object and redirects to the user list.
-     *
-     * @param user the user object submitted from the form
-     * @return redirect to "/users"
+     * @param user the user object to create
+     * @return the created user
      */
     @PostMapping("/create")
-    public String createUser(@ModelAttribute User user) {
+    public User createUser(@RequestBody User user) {
         userService.createUser(user);
-        return "redirect:/users";
+        return user;
     }
 }

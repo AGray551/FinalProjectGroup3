@@ -12,8 +12,8 @@ import java.util.List;
  * Provides endpoints to retrieve events, create new events, and RSVP to events.
  */
 @RestController
-@RequestMapping("/api/events") // use /api prefix for frontend fetches
-@CrossOrigin(origins = "http://localhost:3000") // React dev server
+@RequestMapping("/api/events")
+@CrossOrigin(origins = "http://localhost:3000")
 public class EventController {
 
     @Autowired

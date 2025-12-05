@@ -20,6 +20,6 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("message", "Welcome to Event Tracker!");
-        return "home"; // Thymeleaf template
+        return "home";
     }
 }
