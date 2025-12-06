@@ -51,4 +51,15 @@ public class EventController {
     public void rsvpEvent(@PathVariable String id, @RequestParam String userId) {
         eventService.rsvpToEvent(id, userId);
     }
+
+    /**
+     * Cancel RSVP for a user on an event.
+     *
+     * @param id the ID of the event
+     * @param userId the ID of the user
+     */
+    @DeleteMapping("/{id}/rsvp")
+    public void cancelRsvp(@PathVariable String id, @RequestParam String userId) {
+        eventService.cancelRsvp(id, userId);
+    }
 }

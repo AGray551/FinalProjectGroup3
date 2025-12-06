@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Settings } from 'lucide-react';
 
 const SignUpScreen = ({ onSignup, onNavigate }) => {
   const [formData, setFormData] = useState({
@@ -9,20 +8,46 @@ const SignUpScreen = ({ onSignup, onNavigate }) => {
     password: ''
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Validation function
+  const validate = () => {
+    const newErrors = {};
+
+    // Username required
+    if (!formData.username.trim()) newErrors.username = 'Username is required';
+
+    // Email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) newErrors.email = 'Email is required';
+    else if (!emailRegex.test(formData.email))
+      newErrors.email = 'Invalid email address';
+
+    // Student ID: M + 8 digits
+    const studentIdRegex = /^M\d{8}$/;
+    if (!formData.studentId) newErrors.studentId = 'Student ID is required';
+    else if (!studentIdRegex.test(formData.studentId))
+      newErrors.studentId = 'Student ID must be "M" followed by 8 digits';
+
+    // Password: minimum 8 characters
+    if (!formData.password) newErrors.password = 'Password is required';
+    else if (formData.password.length < 8)
+      newErrors.password = 'Password must be at least 8 characters';
+
+    return newErrors;
   };
 
   const handleSubmit = async () => {
-    if (!formData.username || !formData.password) {
-      return alert("Please fill in required fields");
-    }
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
 
     const newUser = {
-      id: Date.now().toString(),      // <-- add this
+      id: Date.now().toString(),
       username: formData.username,
       email: formData.email,
       studentId: formData.studentId,
@@ -37,7 +62,7 @@ const SignUpScreen = ({ onSignup, onNavigate }) => {
       });
 
       if (!res.ok) {
-        const text = await res.text(); // optional: see backend error
+        const text = await res.text(); // optional: backend error
         console.error("Backend error:", text);
         throw new Error("Signup failed");
       }
@@ -59,69 +84,63 @@ const SignUpScreen = ({ onSignup, onNavigate }) => {
         </h2>
 
         {/* Username */}
-        <div className="space-y-2">
-          <label className="text-black/80 font-medium text-lg ml-1">
-            Username
-          </label>
+        <div className="space-y-1">
           <input
             name="username"
             type="text"
             placeholder="Choose a username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full bg-white rounded-lg px-4 py-3 text-gray-700
-                       placeholder-gray-400 focus:outline-none focus:ring-2
-                       focus:ring-red-400 shadow-sm"
+            className={`w-full bg-white rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400
+                        focus:outline-none focus:ring-2 focus:ring-red-400 shadow-sm
+                        ${errors.username ? 'border-2 border-red-500' : ''}`}
           />
+          {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
         </div>
 
         {/* Email */}
-        <div className="space-y-2">
-          <label className="text-black/80 font-medium text-lg ml-1">Email</label>
+        <div className="space-y-1">
           <input
             name="email"
             type="email"
             placeholder="name@university.edu"
             value={formData.email}
             onChange={handleChange}
-            className="w-full bg-white rounded-lg px-4 py-3 text-gray-700
-                       placeholder-gray-400 focus:outline-none focus:ring-2
-                       focus:ring-red-400 shadow-sm"
+            className={`w-full bg-white rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400
+                        focus:outline-none focus:ring-2 focus:ring-red-400 shadow-sm
+                        ${errors.email ? 'border-2 border-red-500' : ''}`}
           />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
 
         {/* Student ID */}
-        <div className="space-y-2">
-          <label className="text-black/80 font-medium text-lg ml-1">
-            Student ID
-          </label>
+        <div className="space-y-1">
           <input
             name="studentId"
             type="text"
-            placeholder="e.g. 9928381"
+            placeholder="e.g. M12345678"
             value={formData.studentId}
             onChange={handleChange}
-            className="w-full bg-white rounded-lg px-4 py-3 text-gray-700
-                       placeholder-gray-400 focus:outline-none focus:ring-2
-                       focus:ring-red-400 shadow-sm"
+            className={`w-full bg-white rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400
+                        focus:outline-none focus:ring-2 focus:ring-red-400 shadow-sm
+                        ${errors.studentId ? 'border-2 border-red-500' : ''}`}
           />
+          {errors.studentId && <p className="text-red-500 text-sm">{errors.studentId}</p>}
         </div>
 
         {/* Password */}
-        <div className="space-y-2">
-          <label className="text-black/80 font-medium text-lg ml-1">
-            Password
-          </label>
+        <div className="space-y-1">
           <input
             name="password"
             type="password"
             placeholder="Create a password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full bg-white rounded-lg px-4 py-3 text-gray-700
-                       placeholder-gray-400 focus:outline-none focus:ring-2
-                       focus:ring-red-400 shadow-sm"
+            className={`w-full bg-white rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400
+                        focus:outline-none focus:ring-2 focus:ring-red-400 shadow-sm
+                        ${errors.password ? 'border-2 border-red-500' : ''}`}
           />
+          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
 
         {/* Buttons */}

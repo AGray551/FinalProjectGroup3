@@ -24,75 +24,80 @@ function App() {
       .catch(err => console.error("Failed to fetch events:", err));
   }, []);
 
-  // 🔥 This renders ALL screens — nothing removed.
   const renderScreen = () => {
+    // Redirect to Login if user is not logged in and trying to access Profile or MyEvents
+    if (!user && (currentPage === 'Profile' || currentPage === 'MyEvents')) {
+      return <LoginScreen
+        onLogin={(loggedInUser) => {
+          setUser(loggedInUser);
+          setCurrentPage('EventFeed');
+        }}
+        onNavigate={setCurrentPage}
+      />;
+    }
+
     switch (currentPage) {
       case 'MyEvents':
-        return <MyEventsScreen />;
+        return <MyEventsScreen user={user} />;
 
       case 'EventFeed':
         return (
           <EventFeedScreen
             events={events}
             onNavigate={setCurrentPage}
+            user={user}
           />
         );
 
       case 'CreateEvent':
+        return <CreateEventScreen onNavigate={setCurrentPage} />;
+
+      case 'Login':
         return (
-          <CreateEventScreen
+          <LoginScreen
+            onLogin={(loggedInUser) => {
+              setUser(loggedInUser);
+              setCurrentPage('EventFeed');
+            }}
             onNavigate={setCurrentPage}
           />
         );
 
-        case 'Login':
-          return (
-            <LoginScreen
-              onLogin={(loggedInUser) => {
-                setUser(loggedInUser);
-                setCurrentPage('EventFeed'); // navigate after login
-              }}
-              onNavigate={setCurrentPage} // optional if you want a "Sign Up" link
-            />
-          );
-
-        case 'SignUp':
-          return (
-            <SignUpScreen
-              onSignup={(newUser) => {
-                // Call backend to create user
-                fetch('http://localhost:8080/api/users/create', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(newUser)
+      case 'SignUp':
+        return (
+          <SignUpScreen
+            onSignup={(newUser) => {
+              fetch('http://localhost:8080/api/users/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newUser)
+              })
+                .then(res => res.json())
+                .then(data => {
+                  alert('User created: ' + data.name);
+                  setCurrentPage('Login');
                 })
-                  .then(res => res.json())
-                  .then(data => {
-                    alert('User created: ' + data.name);
-                    setCurrentPage('Login'); // go back to login
-                  })
-                  .catch(err => console.error(err));
-              }}
-              onNavigate={setCurrentPage}
-            />
-          );
-
-          const handleLogout = () => {
-            setUser(null);           // clear logged-in user
-            setCurrentPage('Login'); // navigate to login screen
-          };
+                .catch(err => console.error(err));
+            }}
+            onNavigate={setCurrentPage}
+          />
+        );
 
       case 'Profile':
-        return <ProfileScreen user={user} onLogout={() => {
-          setUser(null);
-          setCurrentPage('Login');
-        }} />;
+        return <ProfileScreen
+          user={user}
+          onLogout={() => {
+            setUser(null);
+            setCurrentPage('Login');
+          }}
+        />;
 
       default:
         return (
           <EventFeedScreen
             events={events}
             onNavigate={setCurrentPage}
+            user={user}
           />
         );
     }
@@ -100,15 +105,15 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-[#B93434]">
-      {/* AuthHeader: fixed at top, always visible if user not logged in */}
+      {/* AuthHeader: fixed at top if not logged in */}
       {!user && (
         <div className="fixed top-0 left-0 w-full z-50">
-          <AuthHeader currentPage={currentPage} onNavigate={setCurrentPage} />
+          <AuthHeader onNavigate={setCurrentPage} />
         </div>
       )}
 
       {/* Main content */}
-      <div className={`pt-24 pb-20`}>
+      <div className={`${!user ? "pt-20" : "pt-4"} pb-20`}>
         {renderScreen()}
       </div>
 

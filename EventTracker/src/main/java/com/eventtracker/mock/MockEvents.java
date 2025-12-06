@@ -45,4 +45,12 @@ public class MockEvents implements EventService {
             event.addAttendee(userId);
         }
     }
+
+    @Override
+    public void cancelRsvp(String eventId, String userId) {
+        Event event = getEventById(eventId);
+        if (event != null) {
+            event.getAttendees().remove(userId);
+        }
+    }
 }

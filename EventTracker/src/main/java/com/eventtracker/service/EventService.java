@@ -41,4 +41,13 @@ public interface EventService {
      * @param userId the ID of the user RSVPing
      */
     void rsvpToEvent(String eventId, String userId);
+
+    /**
+     * Cancels a user's RSVP for a particular event.
+     *
+     * @param eventId the ID of the event
+     * @param userId the ID of the user
+     */
+    void cancelRsvp(String eventId, String userId);
+
 }

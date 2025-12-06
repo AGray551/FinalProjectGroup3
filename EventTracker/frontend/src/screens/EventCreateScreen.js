@@ -8,18 +8,46 @@ const EventCreateScreen = ({ onNavigate }) => {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
 
+  const [errors, setErrors] = useState({});
+
+  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result);  // base64
-    };
+    reader.onloadend = () => setImage(reader.result);  // base64
     reader.readAsDataURL(file);
   };
 
+  // Validation logic
+  const validate = () => {
+    const newErrors = {};
+
+    if (!title.trim()) newErrors.title = 'Title is required';
+    if (!location.trim()) newErrors.location = 'Location is required';
+    if (!description.trim()) newErrors.description = 'Description is required';
+
+    if (!date) {
+      newErrors.date = 'Date is required';
+    } else {
+      const selectedDate = new Date(date);
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      if (selectedDate < tomorrow) {
+        newErrors.date = 'Date must be at least tomorrow';
+      }
+    }
+
+    return newErrors;
+  };
+
   const handleCreateEvent = async () => {
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
     const newEvent = {
       id: Date.now().toString(),
       title,
@@ -50,26 +78,57 @@ const EventCreateScreen = ({ onNavigate }) => {
 
       <div className="flex flex-col md:flex-row gap-6">
         <div className="flex-1 space-y-6">
-          <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="Name" className="w-full bg-white rounded-lg px-4 py-3 text-lg shadow-md" />
-          <input value={location} onChange={e => setLocation(e.target.value)} type="text" placeholder="Location" className="w-full bg-white rounded-lg px-4 py-3 text-lg shadow-md" />
+          {/* Title */}
+          <input
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            type="text"
+            placeholder="Name"
+            className={`w-full bg-white rounded-lg px-4 py-3 text-lg shadow-md ${errors.title ? 'border-2 border-red-500' : ''}`}
+          />
+          {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
 
-          <div className="bg-white rounded-xl p-4 shadow-md w-fit">
+          {/* Location */}
+          <input
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+            type="text"
+            placeholder="Location"
+            className={`w-full bg-white rounded-lg px-4 py-3 text-lg shadow-md ${errors.location ? 'border-2 border-red-500' : ''}`}
+          />
+          {errors.location && <p className="text-red-500 text-sm">{errors.location}</p>}
+
+          {/* Date */}
+          <div className={`bg-white rounded-xl p-4 shadow-md w-fit ${errors.date ? 'border-2 border-red-500' : ''}`}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-lg font-medium">Enter date</span>
               <CalendarIcon className="w-5 h-5 text-gray-600" />
             </div>
-
             <div className="border border-purple-500 rounded px-2 py-1 w-full max-w-[200px]">
               <span className="text-xs text-purple-600 block -mt-3 bg-white w-fit px-1">Date</span>
-              <input value={date} onChange={e => setDate(e.target.value)} type="date" className="w-full outline-none text-sm" />
+              <input
+                value={date}
+                onChange={e => setDate(e.target.value)}
+                type="date"
+                className="w-full outline-none text-sm"
+              />
             </div>
           </div>
+          {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
 
-          <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" rows={5} className="w-full bg-white rounded-lg px-4 py-3 text-lg shadow-md" />
+          {/* Description */}
+          <textarea
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            placeholder="Description"
+            rows={5}
+            className={`w-full bg-white rounded-lg px-4 py-3 text-lg shadow-md ${errors.description ? 'border-2 border-red-500' : ''}`}
+          />
+          {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
         </div>
 
+        {/* Right side: Image Upload */}
         <div className="flex-1 space-y-6 flex flex-col items-center">
-          {/* Hidden File Input */}
           <input
             type="file"
             accept="image/*"
@@ -77,8 +136,6 @@ const EventCreateScreen = ({ onNavigate }) => {
             className="hidden"
             id="imageUpload"
           />
-
-          {/* Clickable Image Box */}
           <label
             htmlFor="imageUpload"
             className="w-full max-w-xs h-56 bg-white rounded-xl shadow-md flex flex-col items-center justify-center cursor-pointer"
@@ -93,7 +150,6 @@ const EventCreateScreen = ({ onNavigate }) => {
             )}
           </label>
 
-          {/* Add Event Button */}
           <button
             onClick={handleCreateEvent}
             className="w-full max-w-xs bg-white text-black text-lg font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition"
