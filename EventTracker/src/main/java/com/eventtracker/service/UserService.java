@@ -28,6 +28,8 @@ public interface UserService {
      */
     User getUserById(String id);
 
+    User findByUsername(String username);
+
     /**
      * Creates a new user and stores them in the system.
      *

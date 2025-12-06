@@ -1,20 +1,44 @@
 import React, { useState } from 'react';
-import { Settings } from 'lucide-react';
 
-const LoginScreen = ({ onLogin }) => {
+const LoginScreen = ({ onLogin, onNavigate }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    // You can add API call or validation here
-    onLogin(username, password);
+  const handleSubmit = async () => {
+    if (!username || !password) {
+      return alert("Please enter both username and password");
+    }
+
+    try {
+      const res = await fetch("http://localhost:8080/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        alert("Login failed: " + errorText);
+        return;
+      }
+
+      const user = await res.json();
+      onLogin(user);
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Error connecting to the server.");
+    }
   };
 
   return (
     <div className="min-h-screen bg-[#B93434] flex flex-col items-center justify-center p-8">
-      <div className="w-full max-w-sm space-y-6">
+      <div className="w-full max-w-sm space-y-5">
+        {/* Header */}
+        <h2 className="text-3xl font-bold text-black/80 text-center mb-4">
+          Login
+        </h2>
 
-        {/* Username Field */}
+        {/* Username */}
         <div className="space-y-2">
           <label className="text-black/80 font-medium text-lg ml-1">Username</label>
           <input
@@ -26,7 +50,7 @@ const LoginScreen = ({ onLogin }) => {
           />
         </div>
 
-        {/* Password Field */}
+        {/* Password */}
         <div className="space-y-2">
           <label className="text-black/80 font-medium text-lg ml-1">Password</label>
           <input
@@ -39,15 +63,21 @@ const LoginScreen = ({ onLogin }) => {
         </div>
 
         {/* Buttons */}
-        <div className="pt-8 space-y-4 flex flex-col items-center">
+        <div className="pt-6 space-y-4 flex flex-col items-center">
           <button
             onClick={handleSubmit}
-            className="bg-[#333333] text-white text-lg px-8 py-2 rounded-md hover:bg-black transition-colors w-32"
+            className="bg-[#333333] text-white text-lg px-8 py-2 rounded-md hover:bg-black transition-colors w-40"
           >
             Login
           </button>
-        </div>
 
+          <button
+            onClick={() => onNavigate('SignUp')}
+            className="text-white underline hover:text-gray-200 text-sm"
+          >
+            Create Account
+          </button>
+        </div>
       </div>
     </div>
   );

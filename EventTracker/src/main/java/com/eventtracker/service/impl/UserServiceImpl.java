@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(id).orElse(null);
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
     /**
      * Creates and stores a new user in the database.
      *

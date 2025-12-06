@@ -1,33 +1,23 @@
 import React from 'react';
 
-const AuthHeader = ({ currentPage, onNavigate }) => {
+const AuthHeader = ({ onNavigate }) => {
   return (
-    <div className="absolute top-0 left-0 w-full p-6 flex justify-end space-x-8 pr-10 pt-8 z-10">
+    <div className="w-full bg-[#B93434] shadow-md fixed top-0 left-0 z-50">
+      <div className="max-w-6xl mx-auto flex justify-end items-center py-4 px-6">
+        <button
+          className="bg-white text-[#B93434] font-semibold px-5 py-2 rounded mr-4"
+          onClick={() => onNavigate('Login')}
+        >
+          Login
+        </button>
 
-      {/* Login Link */}
-      <button
-        onClick={() => onNavigate('Login')}
-        className={`text-xl transition-colors ${
-          currentPage === 'Login'
-            ? 'text-white font-bold border-b-2 border-white pb-1'
-            : 'text-white/80 font-medium hover:text-white'
-        }`}
-      >
-        Login
-      </button>
-
-      {/* Signup Link */}
-      <button
-        onClick={() => onNavigate('SignUp')}
-        className={`text-xl transition-colors ${
-          currentPage === 'SignUp'
-            ? 'text-white font-bold border-b-2 border-white pb-1'
-            : 'text-white/80 font-medium hover:text-white'
-        }`}
-      >
-        Sign Up
-      </button>
-
+        <button
+          className="bg-white text-[#B93434] font-semibold px-5 py-2 rounded"
+          onClick={() => onNavigate('SignUp')}
+        >
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };

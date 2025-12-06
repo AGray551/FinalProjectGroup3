@@ -14,11 +14,7 @@ import LoginScreen from './screens/LoginScreen';
 function App() {
   const [currentPage, setCurrentPage] = useState('EventFeed');
   const [events, setEvents] = useState([]);
-  const [user, setUser] = useState({
-    name: "John Doe",
-    email: "john@example.com",
-    studentId: "12345"
-  });
+  const [user, setUser] = useState(null);
 
   // Fetch events from backend
   useEffect(() => {
@@ -50,13 +46,47 @@ function App() {
         );
 
         case 'Login':
-            return <LoginScreen onNavigate={setCurrentPage} />
+          return (
+            <LoginScreen
+              onLogin={(loggedInUser) => {
+                setUser(loggedInUser);
+                setCurrentPage('EventFeed'); // navigate after login
+              }}
+              onNavigate={setCurrentPage} // optional if you want a "Sign Up" link
+            />
+          );
 
         case 'SignUp':
-            return <SignUpScreen onNavigate={setCurrentPage} />
+          return (
+            <SignUpScreen
+              onSignup={(newUser) => {
+                // Call backend to create user
+                fetch('http://localhost:8080/api/users/create', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(newUser)
+                })
+                  .then(res => res.json())
+                  .then(data => {
+                    alert('User created: ' + data.name);
+                    setCurrentPage('Login'); // go back to login
+                  })
+                  .catch(err => console.error(err));
+              }}
+              onNavigate={setCurrentPage}
+            />
+          );
+
+          const handleLogout = () => {
+            setUser(null);           // clear logged-in user
+            setCurrentPage('Login'); // navigate to login screen
+          };
 
       case 'Profile':
-        return <ProfileScreen user={user} />;
+        return <ProfileScreen user={user} onLogout={() => {
+          setUser(null);
+          setCurrentPage('Login');
+        }} />;
 
       default:
         return (
@@ -70,23 +100,22 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-[#B93434]">
+      {/* AuthHeader: fixed at top, always visible if user not logged in */}
+      {!user && (
+        <div className="fixed top-0 left-0 w-full z-50">
+          <AuthHeader currentPage={currentPage} onNavigate={setCurrentPage} />
+        </div>
+      )}
 
-      {/* 🔥 Auth Header visible ALWAYS */}
-      <AuthHeader
-        currentPage={currentPage}
-        onNavigate={setCurrentPage}
-      />
-
-      {/* 🔥 Screen content (padding prevents overlap) */}
-      <div className="pt-24 pb-20">
+      {/* Main content */}
+      <div className={`pt-24 pb-20`}>
         {renderScreen()}
       </div>
 
-      {/* 🔥 Bottom NavBar */}
-      <NavBar
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      {/* Bottom NavBar: fixed */}
+      <div className="fixed bottom-0 left-0 w-full z-50">
+        <NavBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      </div>
     </div>
   );
 }
