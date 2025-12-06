@@ -1,0 +1,66 @@
+2025-12-06 16:43:19.574975-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 16:43:49.424334-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 16:51:34.019002-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 16:55:25.339991-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 16:56:50.548853-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:02:06.393104-05:00 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:02:38.061827-05:00 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:02:53.177991-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:07:07.392456-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:07:15.295714-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:07:42.616293-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:07:47.172145-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:08:08.746930-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:08:13.536012-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:08:17.419062-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:10:12.988793-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:14:07.863243-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:26:48.485991-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:31:46.705283-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:32:20.144683-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:42:35.915160-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordially ... (284)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]
+2025-12-06 17:49:12.102706-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'The University of Cincinnati Nigerian Students'' Association (UCNSA) cordiall... (287)"; SQL statement:
+insert into events (created_by,date,description,image,location,title,id) values (?,?,?,?,?,?,?) [22001-224]

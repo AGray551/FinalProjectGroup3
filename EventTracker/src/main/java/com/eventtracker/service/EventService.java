@@ -50,4 +50,5 @@ public interface EventService {
      */
     void cancelRsvp(String eventId, String userId);
 
+    void deleteEvent(String eventId, String userId);
 }

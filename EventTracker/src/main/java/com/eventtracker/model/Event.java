@@ -13,24 +13,28 @@ public class Event {
     private String id;
     private String title;
     private String description;
+
     @Temporal(TemporalType.DATE)
     private Date date;
     private String location;
+
     @Lob
     private String image;
+    private String createdBy;
 
     @ElementCollection
     private List<String> attendees = new ArrayList<>();
 
     public Event() {}
 
-    public Event(String id, String title, String description, Date date, String location, String image) {
+    public Event(String id, String title, String description, Date date, String location, String image, String createdBy) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
         this.location = location;
         this.image = image;
+        this.createdBy = createdBy;
     }
 
     public void addAttendee(String userId) {
@@ -55,6 +59,9 @@ public class Event {
 
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
+
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
     public List<String> getAttendees() { return attendees; }
 }
