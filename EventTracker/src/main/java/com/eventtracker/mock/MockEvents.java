@@ -3,7 +3,6 @@ package com.eventtracker.mock;
 import com.eventtracker.model.Event;
 import com.eventtracker.service.EventService;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,11 +15,12 @@ public class MockEvents implements EventService {
     private List<Event> events = new ArrayList<>();
 
     public MockEvents() {
-        events.add(new Event("1", "Hackathon", "24-hour coding event", new Date(), "Student Center", null));
-        events.add(new Event("2", "Career Fair", "Meet employers", new Date(), "Main Hall", null));
+        events.add(new Event("1", "Hackathon", "24-hour coding event", new Date(), "Student Center", null, "u1"));
+
+        events.add(new Event("2", "Career Fair", "Meet employers", new Date(), "Main Hall", null, "u2"));
     }
 
-    @Override
+        @Override
     public List<Event> getAllEvents() {
         return events;
     }
@@ -53,4 +53,14 @@ public class MockEvents implements EventService {
             event.getAttendees().remove(userId);
         }
     }
+
+
+    @Override
+    public void deleteEvent(String eventId, String userId) {
+        events.removeIf(e ->
+                e.getId().equals(eventId) &&
+                        e.getCreatedBy().equals(userId)
+        );
+    }
+
 }

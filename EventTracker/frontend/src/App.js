@@ -50,7 +50,7 @@ function App() {
         );
 
       case 'CreateEvent':
-        return <CreateEventScreen onNavigate={setCurrentPage} />;
+        return <CreateEventScreen onNavigate={setCurrentPage} user={user} />;
 
       case 'Login':
         return (

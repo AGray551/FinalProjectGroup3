@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, PenLine, MoreVertical } from 'lucide-react';
+import { Search, PenLine, MoreVertical, Trash2 } from 'lucide-react';
 
 const EventFeedScreen = ({ onNavigate, user }) => {
   const [events, setEvents] = useState([]);
@@ -57,6 +57,24 @@ const EventFeedScreen = ({ onNavigate, user }) => {
     );
   };
 
+  // Delete event handler
+  const handleDelete = async (eventId) => {
+    if (!user) return;
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+
+    try {
+      await fetch(`http://localhost:8080/api/events/${eventId}?userId=${user.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      setEvents(prev => prev.filter(e => e.id !== eventId));
+    } catch (err) {
+      console.error('Failed to delete event', err);
+      alert("Failed to delete event. Make sure you are the creator.");
+    }
+  };
+
   // Filter events based on search and ignore
   const filteredEvents = events.filter((event) => {
     const matchesSearch =
@@ -104,13 +122,13 @@ const EventFeedScreen = ({ onNavigate, user }) => {
         </button>
       </div>
 
-
       {/* Event Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredEvents.map((event) => {
           const eventDate = event.date ? new Date(event.date).toLocaleDateString() : '';
           const hasRsvped = user && event.attendees?.includes(user.id);
           const isIgnored = ignoredEvents.includes(event.id);
+          const isCreator = user && String(event.createdBy) === String(user.id);
 
           return (
             <div
@@ -133,7 +151,7 @@ const EventFeedScreen = ({ onNavigate, user }) => {
               <div className="flex justify-center items-center bg-[#E8EAF6] overflow-hidden h-64">
                 {event.image ? (
                   <img
-                    src={event.image}
+                    src={`data:image/png;base64,${event.image}`} // <-- Add this prefix
                     alt={event.title}
                     className="w-full h-full object-cover"
                   />
@@ -150,23 +168,36 @@ const EventFeedScreen = ({ onNavigate, user }) => {
                 <p className="text-sm font-semibold text-gray-700 mb-1">{eventDate}</p>
                 <p className="text-sm text-gray-500 mb-4">{event.description}</p>
 
-                <div className="flex justify-end mt-3 space-x-2">
-                  <button
-                    onClick={() => toggleIgnore(event.id)}
-                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full shadow-sm hover:bg-gray-300 transition"
-                  >
-                    {ignoredEvents.includes(event.id) ? 'Unignore' : 'Ignore'}
-                  </button>
-                  <button
-                    className={`px-4 py-2 rounded-full shadow-sm transition ${
-                      hasRsvped
-                        ? 'bg-gray-400 text-white hover:bg-gray-500'
-                        : 'bg-[#5E35B1] text-white hover:bg-[#4527A0]'
-                    }`}
-                    onClick={() => handleRsvp(event.id)}
-                  >
-                    {hasRsvped ? 'Cancel RSVP' : 'RSVP'}
-                  </button>
+                <div className="flex justify-between mt-3">
+                  {/* Delete button (left side) */}
+                  {isCreator && (
+                    <button
+                      onClick={() => handleDelete(event.id)}
+                      className="flex items-center px-4 py-2 bg-red-500 text-white rounded-full shadow-sm hover:bg-red-600 transition"
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" /> Delete
+                    </button>
+                  )}
+
+                  {/* Right side buttons */}
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => toggleIgnore(event.id)}
+                      className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full shadow-sm hover:bg-gray-300 transition"
+                    >
+                      {ignoredEvents.includes(event.id) ? 'Unignore' : 'Ignore'}
+                    </button>
+                    <button
+                      className={`px-4 py-2 rounded-full shadow-sm transition ${
+                        hasRsvped
+                          ? 'bg-gray-400 text-white hover:bg-gray-500'
+                          : 'bg-[#5E35B1] text-white hover:bg-[#4527A0]'
+                      }`}
+                      onClick={() => handleRsvp(event.id)}
+                    >
+                      {hasRsvped ? 'Cancel RSVP' : 'RSVP'}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
