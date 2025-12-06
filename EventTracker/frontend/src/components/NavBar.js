@@ -2,8 +2,6 @@ import React from 'react';
 import { Star } from 'lucide-react';
 
 const NavBar = ({ currentPage, setCurrentPage }) => {
-  // Don't show nav on login screen
-  if (currentPage === 'Login') return null;
 
   const navButtons = [
     { label: 'My Events', page: 'MyEvents' },

@@ -1,4 +1,3 @@
-
 package org.example;
 
 import mock.MockEventService;
@@ -22,7 +21,7 @@ public class App {
         MockEventService eventService = new MockEventService();
 
         // Create a user
-        User user = new User("1", "Riddhi", "riddhi@example.com");
+        User user = new User(1L, "Riddhi", "riddhi@example.com");
         userService.createUser(user);
         System.out.println("User created: " + user.getName());
 
@@ -34,7 +33,7 @@ public class App {
         }
 
         // RSVP user to an event
-        String eventId = "1";
+        Long eventId = 1L;
         eventService.rsvpToEvent(eventId, user.getId());
         System.out.println("\nUser " + user.getName() + " RSVPed to event: " + eventId);
 

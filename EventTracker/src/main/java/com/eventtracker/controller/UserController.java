@@ -1,35 +1,62 @@
-
 package com.eventtracker.controller;
 
 import com.eventtracker.model.User;
 import com.eventtracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/users")
+import java.util.List;
+
+/**
+ * REST controller for handling user-related HTTP requests.
+ * Provides endpoints to retrieve users and create new users.
+ */
+@RestController
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    /**
+     * Get all users (JSON).
+     *
+     * @return list of all users
+     */
     @GetMapping
-    public String listUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "users";
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("user", new User());
-        return "createUser";
-    }
-
+    /**
+     * Create a new user (JSON body).
+     *
+     * @param user the user object to create
+     * @return the created user
+     */
     @PostMapping("/create")
-    public String createUser(@ModelAttribute User user) {
+    public User createUser(@RequestBody User user) {
         userService.createUser(user);
-        return "redirect:/users";
+        return user;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginUser) {
+        User user = userService.findByUsername(loginUser.getUsername());
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("User not found");
+        }
+
+        if (!user.getPassword().equals(loginUser.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid password");
+        }
+
+        return ResponseEntity.ok(user); // return user data if login success
     }
 }

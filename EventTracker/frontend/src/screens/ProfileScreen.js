@@ -1,7 +1,7 @@
 import React from 'react';
-import { Settings } from 'lucide-react';
+import { Settings, LogOut } from 'lucide-react';
 
-const ProfileScreen = ({ user }) => {
+const ProfileScreen = ({ user, onLogout }) => {
   return (
     <div className="min-h-screen bg-[#B93434] p-8 pb-24">
       <div className="flex flex-col md:flex-row gap-8 items-start max-w-4xl mx-auto mt-10">
@@ -11,7 +11,7 @@ const ProfileScreen = ({ user }) => {
             <label className="ml-1 text-black/80 font-medium text-lg">Username</label>
             <input
               type="text"
-              value={user?.name || "Username"}
+              value={user?.username || "Username"}
               className="w-full bg-white rounded-lg px-4 py-3 shadow-md focus:outline-none"
               readOnly
             />
@@ -51,9 +51,18 @@ const ProfileScreen = ({ user }) => {
 
           <h2 className="text-white text-2xl font-medium mb-10">Profile Photo</h2>
 
-          <button className="bg-[#5E35B1] hover:bg-[#4527A0] text-white text-xl font-medium px-8 py-3 rounded-full shadow-lg flex items-center transition-colors w-48 justify-center">
+          <button className="bg-[#5E35B1] hover:bg-[#4527A0] text-white text-xl font-medium px-8 py-3 rounded-full shadow-lg flex items-center transition-colors w-48 justify-center mb-4">
             <Settings className="w-6 h-6 mr-3" />
             Settings
+          </button>
+
+          {/* Logout Button */}
+          <button
+            onClick={onLogout}
+            className="bg-[#D32F2F] hover:bg-[#B71C1C] text-white text-xl font-medium px-8 py-3 rounded-full shadow-lg flex items-center transition-colors w-48 justify-center"
+          >
+            <LogOut className="w-6 h-6 mr-3" />
+            Logout
           </button>
         </div>
       </div>
